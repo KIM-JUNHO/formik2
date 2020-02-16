@@ -1,12 +1,12 @@
 import React from 'react';
 import { Formik, Field, Form } from 'formik';
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, Checkbox } from '@material-ui/core';
 
 export default function App() {
   return (
     <div>
       <Formik
-        initialValues={{ firstName: '', lastName: '' }}
+        initialValues={{ firstName: '', lastName: '', isTall: '' }}
         onSubmit={(data, { setSubmitting }) => {
           setSubmitting(true);
           // make async call
@@ -30,6 +30,7 @@ export default function App() {
                 as={TextField}
               />
             </div>
+            <Field name="isTall" type="checkbox" as={Checkbox}></Field>
             <div>
               <Button disabled={isSubmitting} type="submit">
                 submit
