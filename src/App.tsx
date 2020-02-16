@@ -6,7 +6,12 @@ export default function App() {
   return (
     <div>
       <Formik
-        initialValues={{ firstName: '', lastName: '', isTall: '' }}
+        initialValues={{
+          firstName: '',
+          lastName: '',
+          isTall: '',
+          cookies: []
+        }}
         onSubmit={(data, { setSubmitting }) => {
           setSubmitting(true);
           // make async call
@@ -31,6 +36,25 @@ export default function App() {
               />
             </div>
             <Field name="isTall" type="checkbox" as={Checkbox}></Field>
+            <div>cookies:</div>
+            <Field
+              name="cookies"
+              type="checkbox"
+              value="chocolate chip"
+              as={Checkbox}
+            ></Field>
+            <Field
+              name="cookies"
+              type="checkbox"
+              value="snickerdoodle"
+              as={Checkbox}
+            ></Field>
+            <Field
+              name="cookies"
+              type="checkbox"
+              value="sugar"
+              as={Checkbox}
+            ></Field>
             <div>
               <Button disabled={isSubmitting} type="submit">
                 submit
