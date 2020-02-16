@@ -8,7 +8,7 @@ export default function App() {
       <Formik
         initialValues={{ firstName: 'bob' }}
         onSubmit={data => {
-          alert(data.firstName);
+          console.log('submit : ', data);
         }}
       >
         {({ values, handleChange, handleBlur, handleSubmit }) => (
@@ -19,6 +19,7 @@ export default function App() {
               onChange={handleChange}
               onBlur={handleBlur}
             />
+            <pre>{JSON.stringify(values, null, 2)}</pre>
           </form>
         )}
       </Formik>
