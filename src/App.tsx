@@ -7,6 +7,7 @@ import {
   Radio,
   FormControlLabel
 } from '@material-ui/core';
+import * as yup from 'yup';
 
 type MyRadioProps = { label: string } & FieldAttributes<{}>;
 
@@ -31,6 +32,13 @@ const MyTextField: React.FC<FieldAttributes<{}>> = ({
   );
 };
 
+const validationSchema = yup.object({
+  firstName: yup
+    .string()
+    .required()
+    .max(10)
+});
+
 export default function App() {
   return (
     <div>
@@ -42,14 +50,7 @@ export default function App() {
           cookies: [],
           yogurt: ''
         }}
-        validate={values => {
-          const errors: Record<string, string> = {};
-
-          if (values.firstName.includes('bob')) {
-            errors.firstName = 'no bob';
-          }
-          return errors;
-        }}
+        validationSchema={validationSchema}
         onSubmit={(data, { setSubmitting }) => {
           setSubmitting(true);
           // make async call
