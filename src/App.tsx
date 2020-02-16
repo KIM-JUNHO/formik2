@@ -1,11 +1,20 @@
 import React from 'react';
-import { Formik, Field, Form, useField, FieldAttributes } from 'formik';
+import {
+  Formik,
+  Field,
+  Form,
+  useField,
+  FieldAttributes,
+  FieldArray
+} from 'formik';
 import {
   TextField,
   Button,
   Checkbox,
   Radio,
-  FormControlLabel
+  FormControlLabel,
+  Select,
+  MenuItem
 } from '@material-ui/core';
 import * as yup from 'yup';
 
@@ -48,7 +57,8 @@ export default function App() {
           lastName: '',
           isTall: false,
           cookies: [],
-          yogurt: ''
+          yogurt: '',
+          pets: [{ type: 'cat', name: 'jarvis', id: '' + Math.random() }]
         }}
         validationSchema={validationSchema}
         onSubmit={(data, { setSubmitting }) => {
@@ -101,6 +111,31 @@ export default function App() {
                 submit
               </Button>
             </div>
+            <FieldArray name="pets">
+              {arrayHelpers => (
+                <div>
+                  {values.pets.map((pet, index) => {
+                    return (
+                      <div key={pet.id}>
+                        <MyTextField
+                          placeholder="pet name"
+                          name={`pets.${index}.name`}
+                        />
+                        <Field
+                          name={`pets.${index}.type`}
+                          type="select"
+                          as={Select}
+                        >
+                          <MenuItem value="cat">cat</MenuItem>
+                          <MenuItem value="dog">dog</MenuItem>
+                          <MenuItem value="frog">frog</MenuItem>
+                        </Field>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </FieldArray>
             <pre>{JSON.stringify(values, null, 2)}</pre>
             <pre>{JSON.stringify(errors, null, 2)}</pre>
           </Form>
