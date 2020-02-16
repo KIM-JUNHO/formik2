@@ -6,7 +6,7 @@ export default function App() {
   return (
     <div>
       <Formik
-        initialValues={{ firstName: 'bob' }}
+        initialValues={{ firstName: '', lastName: '' }}
         onSubmit={(data, { setSubmitting }) => {
           setSubmitting(true);
           // make async call
@@ -18,6 +18,12 @@ export default function App() {
           <form onSubmit={handleSubmit}>
             <TextField
               name="firstName"
+              value={values.lastName}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            <TextField
+              name="lastName"
               value={values.firstName}
               onChange={handleChange}
               onBlur={handleBlur}
